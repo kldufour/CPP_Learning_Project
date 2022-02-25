@@ -6,23 +6,163 @@ Compilez et lancez le programme.
 
 Allez dans le fichier `tower_sim.cpp` et recherchez la fonction responsable de gérer les inputs du programme.
 Sur quelle touche faut-il appuyer pour ajouter un avion ?
+```
+la touche 'C' permet d'ajouter un avion
+```
+
 Comment faire pour quitter le programme ?
+```
+Pour quitter on peut utiliser la touche 'Q' ou la touche 'X'
+```
+
 A quoi sert la touche 'F' ?
+```
+Elle sert à mettre en plein ecran
+```
 
 Ajoutez un avion à la simulation et attendez.
 Que est le comportement de l'avion ?
+```
+atterissage sur la piste
+recupère des passagers
+quitte le terminal
+quitte la piste
+```
+
 Quelles informations s'affichent dans la console ?
+```
+AY7405 is now landing...
+now servicing AY7405...
+done servicing AY7405
+AY7405 lift off
+```
 
 Ajoutez maintenant quatre avions d'un coup dans la simulation.
 Que fait chacun des avions ?
+```
+trois des avions font sur la piste et sont mis en service, le dernier vole autour en attendant qu'un terminal ce libère
+```
 
 ## B- Analyse du code
 
 Listez les classes du programme à la racine du dossier src/.
 Pour chacune d'entre elle, expliquez ce qu'elle représente et son rôle dans le programme.
 
+
+## AircraftType : 
+```md
+permet d'initialiser un tableau contenant les 3 type d'avion possible, avec leurs vitesse(au sol, dans les aires) et leurs accélérations respectives
+```
+
+## Aircraft : 
+```md
+permet la gestion d'un avion 
+```
+
+## AirportType : 
+```md
+permet la gestion des informations d'un aéroport
+```
+
+### Airport : 
+```md
+permet la gestion d'un aéroport
+``` 
+
+## Runway : 
+```md
+permet de donnée la position des pistes par rapport à la position de l'aéroport
+```
+
+## Terminal : 
+```md
+permet de représenter les terminaux et permet aux avions de récupérer des passagers
+``` 
+
+## TowerSimulation : 
+```md
+permet la gestion de toutes la simulation ainsi que les actions de l'utilisateur
+```
+
+## Tower : 
+```md
+permet de représenter les tours de contrôle
+```
+
+## Waypoint : 
+```md
+permet de représenter un point sur le chemin d'un avion
+```
+
 Pour les classes `Tower`, `Aircaft`, `Airport` et `Terminal`, listez leurs fonctions-membre publiques et expliquez précisément à quoi elles servent.
 Réalisez ensuite un schéma présentant comment ces différentes classes intéragissent ensemble.
+
+
+## Tower :
+### WaypointQueue get_instructions(Aircraft& aircraft) 
+```md
+
+```
+
+### void arrived_at_terminal(consr Aircraft& aircraft)
+```md
+
+```
+
+## Aicraft :
+### const st::string& get_flight_num() const
+```md
+```
+### float distance_to(const Point3D& p) const
+```md
+```
+### void display() const override
+```md
+```
+### void move() override
+```md
+```
+
+## Airport :
+### Tower& get_tower()
+```md
+permet d'avoir accés au champ tower
+```
+### void display() const override
+```md
+permet d'afficher l'aéroport
+```
+### void move() override
+```md
+pour chacun des terminales appartenant à la liste de teminals, on fait appel à leur fonction move
+```
+
+## Terminal :
+### bool in_use() const
+```md
+teste si le champ current_aircraft est assigné
+```
+### bool is_servicing() const
+```md
+teste si un avion est mis en service
+```
+### void assign_craft(const Aircraft& aircraft)
+```md
+assigne aicraft au champs current_aircraft
+```
+### void start_service(const Aircraft& aircraft)
+```md 
+met aicraft en service et affiche le message correspondant
+```
+### void finish_service()
+```md
+met fin au service et affiche le message correspondant
+```
+### void move() override
+```md
+incrémentent le champs service_progress
+```
+
 
 Quelles classes et fonctions sont impliquées dans la génération du chemin d'un avion ?
 Quel conteneur de la librairie standard a été choisi pour représenter le chemin ?
@@ -33,7 +173,9 @@ Expliquez les intérêts de ce choix.
 1) Déterminez à quel endroit du code sont définies les vitesses maximales et accélération de chaque avion.
 Le Concorde est censé pouvoir voler plus vite que les autres avions.
 Modifiez le programme pour tenir compte de cela.
-
+```
+classe AicraftType
+```
 2) Identifiez quelle variable contrôle le framerate de la simulation.
 Ajoutez deux nouveaux inputs au programme permettant d'augmenter ou de diminuer cette valeur.
 Essayez maintenant de mettre en pause le programme en manipulant ce framerate. Que se passe-t-il ?\
