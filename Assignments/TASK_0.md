@@ -101,26 +101,32 @@ Réalisez ensuite un schéma présentant comment ces différentes classes intér
 ## Tower :
 ### WaypointQueue get_instructions(Aircraft& aircraft) 
 ```md
+Permet de donner des instructions au avions. 
+Tout d'abord si l'avion n'est pas a un terminal, on teste s'il est proche de l'aéroport si ce n'est pas le cas alors il est guidé jusqu'à l'aéroport. Ensuite si un terminal est disponible il est reservé pour l'avion sinon l'avion tourne autour de l'aéroport. Sinon l'avion est mis en service au terminal, une fois la mise en service terminé l'avion est prêt à partir.
 
 ```
 
 ### void arrived_at_terminal(consr Aircraft& aircraft)
 ```md
-
+permet d'assigner un terminal à l'avion
 ```
 
 ## Aicraft :
 ### const st::string& get_flight_num() const
 ```md
+permet d'avoir accès au champ flight_number
 ```
 ### float distance_to(const Point3D& p) const
 ```md
+permet d'avoir la distance entre le champ pos et le position p
 ```
 ### void display() const override
 ```md
+permet d'afficher un avion
 ```
 ### void move() override
 ```md
+
 ```
 
 ## Airport :
@@ -163,7 +169,6 @@ met fin au service et affiche le message correspondant
 incrémentent le champs service_progress
 ```
 
-
 Quelles classes et fonctions sont impliquées dans la génération du chemin d'un avion ?
 Quel conteneur de la librairie standard a été choisi pour représenter le chemin ?
 Expliquez les intérêts de ce choix.
@@ -174,14 +179,21 @@ Expliquez les intérêts de ce choix.
 Le Concorde est censé pouvoir voler plus vite que les autres avions.
 Modifiez le programme pour tenir compte de cela.
 ```
-classe AicraftType
+Les vitesses maximales et accélération de chaque avion sont définies dans la classe AicraftType
 ```
 2) Identifiez quelle variable contrôle le framerate de la simulation.
 Ajoutez deux nouveaux inputs au programme permettant d'augmenter ou de diminuer cette valeur.
+
+```md
+La variable ticks_per_sec permet de contrôler le framrate de la simulation. On trouve cette variable dans le fichier opengl_interface.hpp
+```
 Essayez maintenant de mettre en pause le programme en manipulant ce framerate. Que se passe-t-il ?\
 Ajoutez une nouvelle fonctionnalité au programme pour mettre le programme en pause, et qui ne passe pas par le framerate.
 
 3) Identifiez quelle variable contrôle le temps de débarquement des avions et doublez-le.
+```md
+La variable SERVICES_CYCLES du fichier config.hpp permet de contrôler le temps de débarquement des avions.
+```
 
 4) Lorsqu'un avion a décollé, il réattérit peu de temps après.
 Faites en sorte qu'à la place, il soit retiré du programme.\
