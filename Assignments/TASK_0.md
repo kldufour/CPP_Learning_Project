@@ -122,7 +122,7 @@ permet d'avoir la distance entre le champ pos et le position p
 ```
 ### void display() const override
 ```md
-permet d'afficher un avion
+permet d'afficher un avion, dans cet méthode on récupère la texture (GL::Texture2D) à partir du type de l'avion qui nous permet ensuite de le render à la bonne position
 ```
 ### void move() override
 ```md
