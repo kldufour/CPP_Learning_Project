@@ -1,5 +1,6 @@
 #pragma once
 
+#include "aircraft_factory.hpp"
 #include "aircraft_manager.hpp"
 
 class Airport;
@@ -11,14 +12,15 @@ private:
     bool help        = false;
     Airport* airport = nullptr;
     AircraftManager manager;
+    AircraftFactory* factory = nullptr;
 
     TowerSimulation(const TowerSimulation&) = delete;
     TowerSimulation& operator=(const TowerSimulation&) = delete;
 
-    std::unique_ptr<Aircraft> create_aircraft(const AircraftType& type) const;
-    std::unique_ptr<Aircraft> create_random_aircraft() const;
+    // std::unique_ptr<Aircraft> create_aircraft(const AircraftType& type) const;
+    // std::unique_ptr<Aircraft> create_random_aircraft() const;
 
-    void create_keystrokes() const;
+    void create_keystrokes();
     void display_help() const;
 
     void init_airport();
