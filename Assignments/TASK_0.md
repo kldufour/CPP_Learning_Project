@@ -126,7 +126,7 @@ permet d'afficher un avion, dans cet méthode on récupère la texture (GL::Text
 ```
 ### void move() override
 ```md
-
+permet de mettre en mouvement un aircraft
 ```
 
 ## Airport :
