@@ -83,7 +83,7 @@ void TowerSimulation::init_airport()
                             new img::Image { one_lane_airport_sprite_path.get_full_path() } };
 
     // GL::display_queue.emplace_back(airport);
-    // GL::move_queue.emplace(airport);
+    GL::move_queue.emplace(airport);
     GL::move_queue.emplace(&manager);
 }
 

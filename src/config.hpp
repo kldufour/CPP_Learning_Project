@@ -28,6 +28,4 @@ constexpr float DEFAULT_ZOOM = 2.0f;
 constexpr size_t DEFAULT_WINDOW_WIDTH  = 800;
 constexpr size_t DEFAULT_WINDOW_HEIGHT = 600;
 
-// constexpr size_t NUM_AIRCRAFT_TYPES = 3;
-
 using AircraftCrash = std::runtime_error;

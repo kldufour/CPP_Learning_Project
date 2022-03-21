@@ -22,7 +22,7 @@ Rendez-vous compte de quelle classe peut acquérir cet information. Utilisez la 
 ### C - Relooking de Point3D
 
 La classe `Point3D` présente beaucoup d'opportunités d'appliquer des algorithmes.
-Particulairement, des formulations de type `x() = ...; y() = ...; z() = ...;` se remplacent par un seul appel à la bonne fonction de la librairie standard.
+Particulièrement, des formulations de type `x() = ...; y() = ...; z() = ...;` se remplacent par un seul appel à la bonne fonction de la librairie standard.
 Remplacez le tableau `Point3D::values` par un `std::array` et puis,
 remplacez le code des fonctions suivantes en utilisant des fonctions de `<algorithm>` / `<numeric>`:
 
@@ -126,7 +126,15 @@ Elle devra appeler la fonction `refill` sur l'avion actuellement au terminal, si
 \- Sinon `next_refill_time` est décrémenté.\
 \- Chaque terminal réapprovisionne son avion s'il doit l'être.
 
-### E - Paramétrage (optionnel)
+
+### E - Déréservation
+
+Si vous avez suffisamment testé votre programme, vous avez dû vous apercevoir que parfois, certains terminaux arrêtaient d'être réservés et utilisés.\
+En effet, lorsque les avions se crashent alors qu'ils avaient un terminal de réservé, rien n'a été fait pour s'assurer que le terminal allait de nouveau être libre.
+
+Pour garantir cela, vous allez modifier le destructeur de `Aircraft`. Si l'avion a réservé un terminal, assurez-vous que celui-ci est correctement libéré. Pour cela, vous aurez besoin de rajouter une fonction dans la classe `Tower`. Choisissez-lui un nom qui décrit correctement ce qu'elle fait.
+
+### F - Paramétrage (optionnel)
 
 Pour le moment, tous les avions ont la même consommation d'essence (1 unité / trame) et la même taille de réservoir (`3'000`).
 
