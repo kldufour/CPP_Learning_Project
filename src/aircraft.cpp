@@ -90,6 +90,13 @@ void Aircraft::add_waypoint(const Waypoint& wp, const bool front)
 
 bool Aircraft::update()
 {
+
+    if (fuel <= 0)
+    {
+        std::cout << "crash is in comming" << std::endl;
+        return false;
+    }
+
     if (waypoints.empty())
     {
         waypoints = control.get_instructions(*this);
@@ -136,6 +143,7 @@ bool Aircraft::update()
                 pos.z() -= SINK_FACTOR * (SPEED_THRESHOLD - speed_len);
             }
         }
+        fuel--;
 
         // update the z-value of the displayable structure
         GL::Displayable::z = pos.x() + pos.y();
