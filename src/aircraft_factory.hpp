@@ -9,7 +9,7 @@
 class AircraftFactory
 {
 private:
-    const std::array<std::string, 8> airlines = { "AF", "LH", "EY", "DL", "KL", "BA", "AY", "EY" };
+    // const std::array<std::string, 8> airlines = { "AF", "LH", "EY", "DL", "KL", "BA", "AY", "EY" };
     const std::array<AircraftType, 3> aircraft_types {
         AircraftType { .02f, .05f, .02f, MediaPath { "l1011_48px.png" } },
         AircraftType { .02f, .05f, .02f, MediaPath { "b707_jat.png" } },
@@ -19,6 +19,8 @@ private:
     std::set<std::string> flying_numbers = {};
 
 public:
+    const std::array<std::string, 8> airlines = { "AF", "LH", "EY", "DL", "KL", "BA", "AY", "EY" };
+
     std::unique_ptr<Aircraft> create_aircraft(const AircraftType& type, Airport& airport)
     {
         const std::string flight_number = airlines[std::rand() % 8] + std::to_string(1000 + (rand() % 9000));
