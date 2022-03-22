@@ -65,5 +65,8 @@ public:
     void display() const override;
     bool update() override;
 
+    bool has_terminal() const;
+    bool is_circling() const;
+
     friend class Tower;
 };
