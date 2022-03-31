@@ -20,6 +20,7 @@ private:
     Tower& control;
     bool landing_gear_deployed = false; // is the landing gear deployed?
     bool is_at_terminal        = false;
+    bool is_service_done       = false;
     int fuel;
 
     // turn the aircraft to arrive at the next waypoint
@@ -67,6 +68,10 @@ public:
 
     bool has_terminal() const;
     bool is_circling() const;
+    bool operator<(const Aircraft& other)
+    {
+        return has_terminal() > other.has_terminal() && fuel < other.fuel;
+    }
 
     friend class Tower;
 };

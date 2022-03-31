@@ -91,23 +91,17 @@ void Aircraft::add_waypoint(const Waypoint& wp, const bool front)
 bool Aircraft::update()
 {
 
-    if (fuel <= 0)
-    {
-        std::cout << "crash is in comming" << std::endl;
-        return false;
-    }
-
     if (waypoints.empty())
     {
+        if (is_service_done)
+        {
+            return false;
+        }
         waypoints = control.get_instructions(*this);
     }
 
     if (!is_at_terminal)
     {
-        if (waypoints.empty())
-        {
-            return false;
-        }
         turn_to_waypoint();
         // move in the direction of the current speed
         pos += speed;
@@ -131,11 +125,25 @@ bool Aircraft::update()
             if (!landing_gear_deployed)
             {
                 using namespace std::string_literals;
-                throw AircraftCrash { flight_number + " crashed into the ground"s };
+                throw AircraftCrash { flight_number + " crashed into the ground" };
             }
         }
         else
         {
+            if (fuel <= 0)
+            {
+                std::cout << flight_number + " crashed" << std::endl;
+                return false;
+            }
+            if (is_circling())
+            {
+                auto tmp = control.reserve_terminal(*this);
+                if (!tmp.empty())
+                {
+                    waypoints.clear();
+                    waypoints = std::move(tmp);
+                }
+            }
             // if we are in the air, but too slow, then we will sink!
             const float speed_len = speed.length();
             if (speed_len < SPEED_THRESHOLD)
@@ -158,10 +166,12 @@ void Aircraft::display() const
 
 bool Aircraft::has_terminal() const
 {
-    return waypoints.back().type == wp_terminal;
+    // return waypoints.back().type == wp_terminal;
+    return !waypoints.empty() && waypoints.back().is_at_terminal();
 }
 
 bool Aircraft::is_circling() const
 {
-    return waypoints.back().type == wp_air;
+    // return waypoints.back().type == wp_air;
+    return !waypoints.empty() && !waypoints.back().is_on_ground() && !is_service_done;
 }

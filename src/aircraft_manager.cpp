@@ -9,18 +9,7 @@ void AircraftManager::add(std::unique_ptr<Aircraft> aircraft)
 
 bool AircraftManager::update()
 {
-    // for (auto it = aircrafts.begin(); it != aircrafts.end();)
-    // {
-    //     auto& aircraft = **it;
-    //     if (aircraft.update())
-    //     {
-    //         ++it;
-    //     }
-    //     else
-    //     {
-    //         it = aircrafts.erase(it);
-    //     }
-    // }
+    std::sort(aircrafts.begin(), aircrafts.end()), [](Aircraft& a1, Aircraft& a2) { a1 < a2; };
 
     aircrafts.erase(std::remove_if(aircrafts.begin(), aircrafts.end(),
                                    [](std::unique_ptr<Aircraft>& aircraft) { return !aircraft->update(); }),
