@@ -137,11 +137,11 @@ bool Aircraft::update()
             }
             if (is_circling())
             {
-                auto tmp = control.reserve_terminal(*this);
-                if (!tmp.empty())
+                auto way = control.reserve_terminal(*this);
+                if (!way.empty())
                 {
                     waypoints.clear();
-                    waypoints = std::move(tmp);
+                    waypoints = std::move(way);
                 }
             }
             // if we are in the air, but too slow, then we will sink!
@@ -166,12 +166,15 @@ void Aircraft::display() const
 
 bool Aircraft::has_terminal() const
 {
-    // return waypoints.back().type == wp_terminal;
     return !waypoints.empty() && waypoints.back().is_at_terminal();
 }
 
 bool Aircraft::is_circling() const
 {
-    // return waypoints.back().type == wp_air;
     return !waypoints.empty() && !waypoints.back().is_on_ground() && !is_service_done;
+}
+
+bool Aircraft::is_low_on_fuel() const
+{
+    return fuel < 200;
 }

@@ -68,9 +68,12 @@ public:
 
     bool has_terminal() const;
     bool is_circling() const;
-    bool operator<(const Aircraft& other)
+
+    bool is_low_on_fuel() const;
+
+    bool operator<(const std::unique_ptr<Aircraft>& other)
     {
-        return has_terminal() > other.has_terminal() && fuel < other.fuel;
+        return has_terminal() > other->has_terminal() && fuel < other->fuel;
     }
 
     friend class Tower;

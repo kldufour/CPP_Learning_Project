@@ -37,6 +37,13 @@ public:
             std::cout << "done servicing " << current_aircraft->get_flight_num() << '\n';
             current_aircraft = nullptr;
         }
+        // else
+        // {
+        //     if (current_aircraft->is_low_on_fuel())
+        //     {
+        //         // stay at terminal
+        //     }
+        // }
     }
 
     bool update() override
