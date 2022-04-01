@@ -61,6 +61,7 @@ public:
     }
 
     const std::string& get_flight_num() const { return flight_number; }
+    int get_fuel() const { return fuel; }
     float distance_to(const Point3D& p) const { return pos.distance_to(p); }
 
     void display() const override;
@@ -70,11 +71,6 @@ public:
     bool is_circling() const;
 
     bool is_low_on_fuel() const;
-
-    bool operator<(const std::unique_ptr<Aircraft>& other)
-    {
-        return has_terminal() > other->has_terminal() && fuel < other->fuel;
-    }
 
     friend class Tower;
 };

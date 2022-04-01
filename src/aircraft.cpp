@@ -90,18 +90,26 @@ void Aircraft::add_waypoint(const Waypoint& wp, const bool front)
 
 bool Aircraft::update()
 {
+    if (is_circling())
+    {
+        auto way = control.reserve_terminal(*this);
+        if (!way.empty())
+        {
+            waypoints = std::move(way);
+        }
+    }
 
     if (waypoints.empty())
     {
-        if (is_service_done)
-        {
-            return false;
-        }
         waypoints = control.get_instructions(*this);
     }
 
     if (!is_at_terminal)
     {
+        if (waypoints.empty())
+        {
+            return false;
+        }
         turn_to_waypoint();
         // move in the direction of the current speed
         pos += speed;
@@ -135,23 +143,15 @@ bool Aircraft::update()
                 std::cout << flight_number + " crashed" << std::endl;
                 return false;
             }
-            if (is_circling())
-            {
-                auto way = control.reserve_terminal(*this);
-                if (!way.empty())
-                {
-                    waypoints.clear();
-                    waypoints = std::move(way);
-                }
-            }
+
             // if we are in the air, but too slow, then we will sink!
             const float speed_len = speed.length();
             if (speed_len < SPEED_THRESHOLD)
             {
                 pos.z() -= SINK_FACTOR * (SPEED_THRESHOLD - speed_len);
             }
+            fuel--;
         }
-        fuel--;
 
         // update the z-value of the displayable structure
         GL::Displayable::z = pos.x() + pos.y();
