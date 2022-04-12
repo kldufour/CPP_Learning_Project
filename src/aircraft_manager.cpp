@@ -29,3 +29,6 @@ int AircraftManager::count_aircraft(const std::string& airline)
                          [airline](std::unique_ptr<Aircraft>& aircraft)
                          { return aircraft->get_flight_num().rfind(airline, 0) == 0; });
 }
+
+int get_required_fuel()
+{}
