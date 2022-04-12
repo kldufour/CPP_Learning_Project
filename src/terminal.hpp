@@ -20,7 +20,10 @@ public:
     Terminal(const Point3D& pos_) : pos { pos_ } {}
 
     bool in_use() const { return current_aircraft != nullptr; }
-    bool is_servicing() const { return service_progress < SERVICE_CYCLES; }
+    bool is_servicing() const
+    {
+        return service_progress < SERVICE_CYCLES || current_aircraft->is_low_on_fuel();
+    }
     void assign_craft(const Aircraft& aircraft) { current_aircraft = &aircraft; }
 
     void start_service(const Aircraft& aircraft)
@@ -32,18 +35,12 @@ public:
 
     void finish_service()
     {
+
         if (!is_servicing())
         {
             std::cout << "done servicing " << current_aircraft->get_flight_num() << '\n';
             current_aircraft = nullptr;
         }
-        // else
-        // {
-        //     if (current_aircraft->is_low_on_fuel())
-        //     {
-        //         // stay at terminal
-        //     }
-        // }
     }
 
     bool update() override
