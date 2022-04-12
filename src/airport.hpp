@@ -19,6 +19,12 @@ private:
     const Point3D pos;
     const GL::Texture2D texture;
     std::vector<Terminal> terminals;
+
+    int fuel_stock       = 0;
+    int ordered_fuel     = 0;
+    int next_refill_time = 0;
+
+    AircraftManager* aircraftManager;
     Tower tower;
 
     // reserve a terminal
