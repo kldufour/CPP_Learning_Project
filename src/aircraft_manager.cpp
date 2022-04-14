@@ -30,5 +30,16 @@ int AircraftManager::count_aircraft(const std::string& airline)
                          { return aircraft->get_flight_num().rfind(airline, 0) == 0; });
 }
 
-int get_required_fuel()
-{}
+int AircraftManager::get_required_fuel()
+{
+    int res = 0;
+    std::for_each(aircrafts.begin(), aircrafts.end(),
+                  [&res](const std::unique_ptr<Aircraft>& aircraft)
+                  {
+                      if (aircraft->is_low_on_fuel() && aircraft->has_terminal())
+                      {
+                          res += (3000 - aircraft->get_fuel());
+                      }
+                  });
+    return res;
+}
