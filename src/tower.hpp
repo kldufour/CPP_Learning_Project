@@ -40,4 +40,5 @@ public:
     void arrived_at_terminal(const Aircraft& aircraft);
 
     WaypointQueue reserve_terminal(Aircraft& aircraft);
+    void free_terminal(Aircraft& aircraft);
 };
