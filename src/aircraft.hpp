@@ -60,6 +60,8 @@ public:
         speed.cap_length(max_speed());
     }
 
+    ~Aircraft() { control.free_terminal(*this); }
+
     const std::string& get_flight_num() const { return flight_number; }
     int get_fuel() const { return fuel; }
     float distance_to(const Point3D& p) const { return pos.distance_to(p); }
