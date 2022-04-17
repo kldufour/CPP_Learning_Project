@@ -49,18 +49,20 @@ C'est la fonction timer du fichier opengl_interface qui est responsable de la de
 ```
 2. Quelles autres structures contiennent une référence sur un avion au moment où il doit être détruit ?
 ```
-Les autres structure contenant une référence sur un avion au moment où il soit être détruit sont move_queue et display_queue.
+Les autres structure contenant une référence sur un avion au moment où il doit être détruit sont move_queue et display_queue.
 ```
 
 3. Comment fait-on pour supprimer la référence sur un avion qui va être détruit dans ces structures ?
 ```
-Pour supprimer la référence sur un avion, il faut rajouter un erase au destructeur des différents endroits où il est référencé.
+Pour supprimer la référence sur un avion, il faut rajouter un erase au différents endroits où il est référencé.
 ```
 
 4. Pourquoi n'est-il pas très judicieux d'essayer d'appliquer la même chose pour votre `AircraftManager` ?
 
 ```
-Il n'est pas trés juducieux d'essayer d'appliquer la même chose, car pour cela il faudrait que la classe Aircraft extends de la classe AircraftManager et faire un conteneur de celui-ci, ce qui n'a pass beaucoup de sens de plus notre AicraftManager est censé avoir une durée de vie équivalente à celle du programme.
+Il n'est pas trés juducieux d'essayer d'appliquer la même chose, car pour cela il faudrait que la classe Aircraft extends\
+de la classe AircraftManager et faire un conteneur de celui-ci, ce qui n'a pas beaucoup de sens de plus notre AicraftManager\
+est censé avoir une durée de vie équivalente à celle du programme.
 ```
 
 Pour simplifier le problème, vous allez déplacer l'ownership des avions dans la classe `AircraftManager`.
