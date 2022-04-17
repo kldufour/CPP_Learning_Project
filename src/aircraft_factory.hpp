@@ -9,7 +9,6 @@
 class AircraftFactory
 {
 private:
-    // const std::array<std::string, 8> airlines = { "AF", "LH", "EY", "DL", "KL", "BA", "AY", "EY" };
     const std::array<AircraftType, 3> aircraft_types {
         AircraftType { .02f, .05f, .02f, MediaPath { "l1011_48px.png" } },
         AircraftType { .02f, .05f, .02f, MediaPath { "b707_jat.png" } },

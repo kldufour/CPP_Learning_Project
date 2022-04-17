@@ -59,4 +59,6 @@ public:
             current_aircraft->refill(fuel_stock);
         }
     }
+
+    void free_terminal() { current_aircraft = nullptr; }
 };

@@ -89,6 +89,7 @@ void Tower::free_terminal(Aircraft& aircraft)
     const auto it = reserved_terminals.find(&aircraft);
     if (it != reserved_terminals.end())
     {
+        airport.get_terminal(it->second).free_terminal();
         reserved_terminals.erase(it);
     }
 }

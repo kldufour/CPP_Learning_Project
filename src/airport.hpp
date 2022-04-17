@@ -77,7 +77,9 @@ public:
         if (next_refill_time == 0)
         {
             std::cout << "fuel received " << ordered_fuel << std::endl;
-            ordered_fuel = std::min(aircraftManager->get_required_fuel(), 5000);
+            // auto fuel_required = aircraftManager->get_required_fuel();
+            // ordered_fuel       = std::min(fuel_required, 5000);
+            ordered_fuel = 5000;
             std::cout << "fuel ordered " << ordered_fuel << std::endl;
             fuel_stock += ordered_fuel;
             std::cout << "fuel sotcked " << fuel_stock << std::endl;
