@@ -102,7 +102,11 @@ Réalisez ensuite un schéma présentant comment ces différentes classes intér
 ### WaypointQueue get_instructions(Aircraft& aircraft) 
 ```md
 Permet de donner des instructions au avions. 
-Tout d'abord si l'avion n'est pas a un terminal, on teste s'il est proche de l'aéroport si ce n'est pas le cas alors il est guidé jusqu'à l'aéroport. Ensuite si un terminal est disponible il est reservé pour l'avion sinon l'avion tourne autour de l'aéroport. Sinon l'avion est mis en service au terminal, une fois la mise en service terminé l'avion est prêt à partir.
+Tout d'abord si l'avion n'est pas a un terminal, on teste s'il est proche de l'aéroport\
+si ce n'est pas le cas alors il est guidé jusqu'à l'aéroport. Ensuite si un terminal est\
+disponible il est reservé pour l'avion sinon l'avion tourne autour de l'aéroport.\
+Sinon l'avion est mis en service au terminal, une fois la mise en service terminé\
+l'avion est prêt à partir.
 
 ```
 
@@ -122,7 +126,8 @@ permet d'avoir la distance entre le champ pos et le position p
 ```
 ### void display() const override
 ```md
-permet d'afficher un avion, dans cet méthode on récupère la texture (GL::Texture2D) à partir du type de l'avion qui nous permet ensuite de le render à la bonne position
+permet d'afficher un avion, dans cet méthode on récupère la texture (GL::Texture2D)\
+ à partir du type de l'avion qui nous permet ensuite de le render à la bonne position
 ```
 ### void move() override
 ```md
@@ -185,7 +190,8 @@ Les vitesses maximales et accélération de chaque avion sont définies dans la 
 Ajoutez deux nouveaux inputs au programme permettant d'augmenter ou de diminuer cette valeur.
 
 ```md
-La variable ticks_per_sec permet de contrôler le framrate de la simulation. On trouve cette variable dans le fichier opengl_interface.hpp
+La variable ticks_per_sec permet de contrôler le framrate de la simulation.\
+ On trouve cette variable dans le fichier opengl_interface.hpp
 ```
 Essayez maintenant de mettre en pause le programme en manipulant ce framerate. Que se passe-t-il ?\
 Ajoutez une nouvelle fonctionnalité au programme pour mettre le programme en pause, et qui ne passe pas par le framerate.
@@ -203,10 +209,20 @@ Pourquoi n'est-il pas sûr de procéder au retrait de l'avion dans cette fonctio
 A quel endroit de la callstack pourriez-vous le faire à la place ?\
 Que devez-vous modifier pour transmettre l'information de la première à la seconde fonction ?
 
+```
+On peut savoir, où l'avion doit être supprimer en utilisant des breakpoint sur les return de la fonction Tower::get_instructions
+On pourrais le faire dans la fonction timer de opengl_interface.cpp
+On modifie le type de retour de la première fonction en bool ce qui permet de tester dans la seconde fonction
+```
+
 5) Lorsqu'un objet de type `Displayable` est créé, il faut ajouter celui-ci manuellement dans la liste des objets à afficher.
 Il faut également penser à le supprimer de cette liste avant de le détruire.
 Faites en sorte que l'ajout et la suppression de `display_queue` soit "automatiquement gérée" lorsqu'un `Displayable` est créé ou détruit.
 Pourquoi n'est-il pas spécialement pertinent d'en faire de même pour `DynamicObject` ?
+
+```
+Il n'est pas pertinent de faire de même pour DynamicObject car c'est une classe polymorphe
+```
 
 6) La tour de contrôle a besoin de stocker pour tout `Aircraft` le `Terminal` qui lui est actuellement attribué, afin de pouvoir le libérer une fois que l'avion décolle.
 Cette information est actuellement enregistrée dans un `std::vector<std::pair<const Aircraft*, size_t>>` (size_t représentant l'indice du terminal).
